@@ -13,7 +13,7 @@
             display: block;
         }
     </style>
-    <title>SAMPLE HTTP APPLICATION</title>
+    <title>PRODUCT APPLICATION</title>
 </head>
 <body>
 <h4>Sign up</h4>

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>SAMPLE HTTP APPLICATION</title>
+    <title>PRODUCT APPLICATION</title>
 </head>
 <body>
 <h4>Log In</h4>
@@ -16,6 +16,7 @@
 <form method="post" action="user">
     Email: <input name="email" type="email" placeholder="email">
     Password: <input name="password" type="password" placeholder="password">
+    <input hidden="hidden" name="login" value="login">
     <button type="submit">Log in</button>
 </form>
     </span>

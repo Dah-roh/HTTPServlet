@@ -14,7 +14,7 @@ public class Users {
     public Users(UserDto signedUpUser) {
         this.name = signedUpUser.getName();
         this.email = signedUpUser.getEmail();
-//        BCrypt bCrypt = new BCrypt.HashData()
-        this.password = signedUpUser.getPassword();
+        String password = BCrypt.withDefaults().hashToString(12, signedUpUser.getPassword().toCharArray());
+        this.password = password;
     }
 }
