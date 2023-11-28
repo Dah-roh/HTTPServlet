@@ -1,4 +1,4 @@
-package com.decagon.servletmvcsq019;
+package com.decagon.servletmvcsq019.serviceImpl;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.decagon.servletmvcsq019.dto.LoginRequestDto;

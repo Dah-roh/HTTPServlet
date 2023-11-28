@@ -23,7 +23,7 @@
 <a href="hello-servlet">Hello Servlet</a>
 <span>
 <a class="main-sign-up" href="user">Sign up</a>
-Already have an account? <a href="user">Log in</a>
+Already have an account? <a href="user?login=login">Log in</a>
 </span>
 </body>
 </html>

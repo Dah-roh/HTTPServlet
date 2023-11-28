@@ -2,9 +2,15 @@ package com.decagon.servletmvcsq019.models;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.decagon.servletmvcsq019.dto.UserDto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Users {
     private Long id;
     private String name;
