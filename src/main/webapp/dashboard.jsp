@@ -14,7 +14,7 @@
 <h1>
 <%  PrintWriter out1 = response.getWriter();
     out1.println("<html><body>");
-    out1.println("<h1>" + request.getAttribute("userId")+ "</h1>");
+    out1.println("<h1>" + session.getAttribute("userID")+ "</h1>");
     out1.println("</body></html>");
 %>
 </h1>

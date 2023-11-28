@@ -49,7 +49,6 @@ public class UserController extends HttpServlet {
             if (userService.verifyPassword.apply(loggedInUser)){
                 HttpSession session = req.getSession();
                 session.setAttribute("userID", user.getId());
-                req.setAttribute("userID", user.getId());
                 RequestDispatcher dispatcher = req.getRequestDispatcher("dashboard.jsp");
                 dispatcher.forward(req, resp);
             }
