@@ -1,4 +1,6 @@
-<%@ page import="java.io.PrintWriter" %><%--
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="com.decagon.servletmvcsq019.models.Product" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: mac
   Date: 28/11/2023
@@ -11,13 +13,28 @@
     <title>PRODUCT APPLICATION</title>
 </head>
 <body>
+
 <h1>
-<%  PrintWriter out1 = response.getWriter();
-    out1.println("<html><body>");
-    out1.println("<h1>" + session.getAttribute("userID")+ "</h1>");
-    out1.println("</body></html>");
-%>
+    <%  PrintWriter out1 = response.getWriter();
+
+        out1.println("<h2>Product Dashboard</h2>" +
+                "<table>\n" +
+                "  <thead> <tr><th>Name </th> <th> Price </th><th>Quantity</th><th> Buy </th></tr></thead>");
+        List<Product> productList = (List<Product>) request.getAttribute("product-list");
+        productList.forEach(product -> {
+            out1.println(
+                    "<tr><td>"+
+                            product.getName()+" "+ "</td><td>" +
+                            product.getProductPrice()+""+ "</td><td>"+
+                            "Quant. <input name="+"quantity value=0>"+ "</td><td>"
+            );
+
+            out1.println("</td></tr>");
+        });
+        out1.println("\n" +
+                "</table>");
+        out1.println("<a href ='product?buy="+"'> Buy</a>");
+    %>
 </h1>
-<h2>Product Dashboard</h2>
 </body>
 </html>

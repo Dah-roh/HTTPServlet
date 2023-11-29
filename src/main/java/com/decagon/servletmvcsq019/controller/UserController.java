@@ -1,5 +1,6 @@
 package com.decagon.servletmvcsq019.controller;
 
+import com.decagon.servletmvcsq019.dao.ProductDao;
 import com.decagon.servletmvcsq019.dao.UserDao;
 import com.decagon.servletmvcsq019.serviceImpl.UserServiceImpl;
 import com.decagon.servletmvcsq019.dto.LoginRequestDto;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 @WebServlet(name ="user", value = "/user")
@@ -25,6 +27,11 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String login = req.getParameter("login")==null?null:req.getParameter("login");
+        String admin = req.getParameter("admin");
+        if (admin!=null&& Objects.equals(admin, "true")){
+            RequestDispatcher dispatcher = req.getRequestDispatcher("admin.jsp");
+            dispatcher.forward(req, resp);
+        }
         if (login!=null){
             RequestDispatcher dispatcher = req.getRequestDispatcher("login.jsp");
             dispatcher.forward(req, resp);
@@ -49,6 +56,7 @@ public class UserController extends HttpServlet {
             if (userService.verifyPassword.apply(loggedInUser)){
                 HttpSession session = req.getSession();
                 session.setAttribute("userID", user.getId());
+                req.setAttribute("product-list", new ProductDao().findAllProducts.get());
                 RequestDispatcher dispatcher = req.getRequestDispatcher("dashboard.jsp");
                 dispatcher.forward(req, resp);
             }

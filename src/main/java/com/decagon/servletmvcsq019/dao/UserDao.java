@@ -1,6 +1,7 @@
 package com.decagon.servletmvcsq019.dao;
 
 import com.decagon.servletmvcsq019.config.DatabaseConfiguration;
+import com.decagon.servletmvcsq019.dto.FundDto;
 import com.decagon.servletmvcsq019.dto.LoginRequestDto;
 import com.decagon.servletmvcsq019.models.Users;
 import com.decagon.servletmvcsq019.service.UserService;
@@ -42,6 +43,27 @@ public class UserDao {
             preparedStatement.setString(1, users.getName());
             preparedStatement.setString(2, users.getEmail());
             preparedStatement.setString(3, users.getPassword());
+            return preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    });
+
+
+    public Function<FundDto, Boolean> updateUserBalance = (funding -> {
+        try {
+            connect.compile();
+        } catch (SQLException | ClassNotFoundException e) {
+            logger.warning("SQL exception"+e.getMessage());
+            throw new RuntimeException(e);
+        }
+        String query = "UPDATE ProductDB.users SET balance = ? WHERE id = ? ";
+
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, funding.getId());
+            preparedStatement.setDouble(2, funding.getAmount().doubleValue());
             return preparedStatement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
