@@ -8,5 +8,5 @@ import java.util.List;
 public class Cart {
     private Long id;
     private Long userId;
-    private List<Long> productId;
+    private List<Long> productIds;
 }

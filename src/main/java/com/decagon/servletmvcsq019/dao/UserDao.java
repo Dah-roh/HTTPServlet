@@ -1,12 +1,12 @@
 package com.decagon.servletmvcsq019.dao;
 
 import com.decagon.servletmvcsq019.config.DatabaseConfiguration;
-import com.decagon.servletmvcsq019.dto.FundDto;
 import com.decagon.servletmvcsq019.dto.LoginRequestDto;
 import com.decagon.servletmvcsq019.models.Users;
 import com.decagon.servletmvcsq019.service.UserService;
 import com.mysql.cj.jdbc.Driver;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Properties;
 import java.util.function.Function;
@@ -35,7 +35,7 @@ public class UserDao {
             logger.warning("SQL exception"+e.getMessage());
             throw new RuntimeException(e);
         }
-        String query = "INSERT INTO ProductDB.users  (name, email, password) VALUES (?, ?, ?) ";
+        String query = "INSERT INTO ProductDB.users  (name, email, password, balance) VALUES (?, ?, ?) ";
 
         PreparedStatement preparedStatement = null;
         try {
@@ -43,6 +43,7 @@ public class UserDao {
             preparedStatement.setString(1, users.getName());
             preparedStatement.setString(2, users.getEmail());
             preparedStatement.setString(3, users.getPassword());
+            preparedStatement.setDouble(4, new BigDecimal(50000000).doubleValue());
             return preparedStatement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -50,7 +51,7 @@ public class UserDao {
     });
 
 
-    public Function<FundDto, Boolean> updateUserBalance = (funding -> {
+    public Function<Users, Boolean> updateUserBalance = (user -> {
         try {
             connect.compile();
         } catch (SQLException | ClassNotFoundException e) {
@@ -62,8 +63,8 @@ public class UserDao {
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setLong(1, funding.getId());
-            preparedStatement.setDouble(2, funding.getAmount().doubleValue());
+            preparedStatement.setLong(2, user.getId());
+            preparedStatement.setDouble(1, user.getBalance().doubleValue());
             return preparedStatement.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -90,7 +91,36 @@ public class UserDao {
                         .id(resultSet.getLong(1))
                         .email(resultSet.getString(2))
                         .password(resultSet.getString(3))
-                        .name(resultSet.getString(4)).build();
+                        .name(resultSet.getString(4))
+                        .balance(resultSet.getBigDecimal(5)).build();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    });
+
+    public Function<Long, Users> findUserById = (id -> {
+        try {
+            connect.compile();
+        } catch (SQLException | ClassNotFoundException e) {
+            logger.warning("SQL exception"+e.getMessage());
+            throw new RuntimeException(e);
+        }
+        String query = "SELECT * FROM ProductDB.users WHERE id = ?";
+
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                return Users.builder()
+                        .id(resultSet.getLong(1))
+                        .email(resultSet.getString(2))
+                        .password(resultSet.getString(3))
+                        .name(resultSet.getString(4))
+                        .balance(resultSet.getBigDecimal(5)).build();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

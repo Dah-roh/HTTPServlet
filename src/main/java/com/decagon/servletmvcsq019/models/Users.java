@@ -18,7 +18,6 @@ public class Users {
     private String name;
     private String email;
     private String password;
-
     private BigDecimal balance;
 
     public Users(UserDto signedUpUser) {
