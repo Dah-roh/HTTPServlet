@@ -34,7 +34,7 @@ public class UserDao {
             logger.warning("SQL exception"+e.getMessage());
             throw new RuntimeException(e);
         }
-        String query = "INSERT INTO ProductDB.users  (name, email, password, balance) VALUES (?, ?, ?) ";
+        String query = "INSERT INTO ProductDB.users  (name, email, password, balance) VALUES (?, ?, ?,?) ";
 
         PreparedStatement preparedStatement = null;
         try {
