@@ -4,7 +4,6 @@ import com.decagon.servletmvcsq019.config.DatabaseConfiguration;
 import com.decagon.servletmvcsq019.dto.LoginRequestDto;
 import com.decagon.servletmvcsq019.models.Users;
 import com.decagon.servletmvcsq019.service.UserService;
-import com.mysql.cj.jdbc.Driver;
 
 import java.math.BigDecimal;
 import java.sql.*;
