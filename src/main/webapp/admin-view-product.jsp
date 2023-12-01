@@ -28,6 +28,7 @@
             "</td><td>"+
             product.getProductPrice()+""+ "</td><td>"
     );
+    //THE HREF TAG BELOW IS WHAT IS RESPONSIBLE FOR MAKING LINE 38 NOT NULL. BY SETTING A REQUEST PARAMETER WITH NAME "edit" and VALUE is the individual product id
     out1.println("<a href ='product?edit="+ product.getId()+"'>Edit</a>");
     out1.println("<a href ='product?delete="+ product.getId()+"'>Delete</a>");
     out1.println("</td></tr>");

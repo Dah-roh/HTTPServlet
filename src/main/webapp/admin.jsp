@@ -26,7 +26,7 @@
     }
     Product editProduct = (Product) request.getAttribute("edit-product");
     if (editProduct!=null){
-
+//the above if condition allows the edit product html form to display if edit-product attribute (set in line 115 of the product controller) is NOT NULL. Else...
 %>
 <form method="post" action="product?edit=product">
     Product Name:<label>
@@ -53,6 +53,8 @@
 
 <% }
 else {
+    //...else the add product html form will display.
+    //The <form action='product?admin=product'> attribute (below) is responsible for providing line 141 of the product controller with a value, so it is NOT NULL and a product can be added
 %><form method="post" action="product?admin=product">
     Product Name:<label>
     <input name="product-name">
@@ -70,6 +72,7 @@ else {
 
 </form>
 <%}%>
+<%--the href below is responsible for making line 41 in the product controller NOT NULL--%>
 <a href="product?admin=view-product">View Product</a>
 </body>
 </html>

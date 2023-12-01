@@ -15,6 +15,7 @@
 </head>
 <body>
 <% HttpSession session1 = request.getSession();
+
 Order order = (Order) session.getAttribute("order");
 %>
 <h1>

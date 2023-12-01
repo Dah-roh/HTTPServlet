@@ -21,6 +21,7 @@
 <h1>SIGN UP SUCCESSFUL.</h1>
 <form action="user" method="get">
 <button type="submit">Log in here</button>
+<%--    the hidden input tag below is responsible for making line 35 of the user controller NOT NULL--%>
 <input hidden="hidden" name="login" value="login">
 </form>
 </body>

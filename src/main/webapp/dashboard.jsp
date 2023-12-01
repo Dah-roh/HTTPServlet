@@ -21,12 +21,15 @@ session1.setAttribute("userID", session.getAttribute("userID"));%>
         out1.println("<h2>Product Dashboard</h2>" +
                 "<table>\n" +
                 "  <thead> <tr><th>Name </th> <th> Price </th><th> Buy </th></tr></thead>");
+        //THE LINE BELOW IS RESPONSIBLE FOR DISPLAYING THE PRODUCT LIST IN LINE 123,129... AND ANYWHERE ELSE THAT STORES THE DATABASE PRODUCT LIST IN
+        //THE REQUEST ATTRIBUTE WITH THE NAME "product-list"
         List<Product> productList = (List<Product>) request.getAttribute("product-list");
         productList.forEach(product -> {
             out1.println(
                     "<tr><td>"+
                             product.getName()+"</td><td>" +
                             product.getProductPrice()+"</td><td>"+
+                            //the href below is responsible for making line 41 in the product controller NOT NULL
                             "<a href ='product?buy="+product.getId()+"'> Buy</a>"+
                             "</td></tr>"
             );
@@ -35,6 +38,7 @@ session1.setAttribute("userID", session.getAttribute("userID"));%>
                 "</table>");
         out1.println();
     %>
+<%--    the href below is responsible for making line 36 in the product controller NOT NULL--%>
     <a href="product?payment=1">Proceed to payment</a>
 </h1>
 </body>

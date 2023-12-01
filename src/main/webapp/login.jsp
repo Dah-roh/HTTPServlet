@@ -24,6 +24,7 @@
 <form method="post" action="user">
     Email: <input class ="form-email" name="email" type="email" placeholder="email">
     Password: <input class ="form-password" name="password" type="password" placeholder="password">
+    <%-- the HIDDEN input field below is responsible for making line 47 in the UserController NOT NULL--%>
     <input hidden="hidden" name="login" value="login">
     <button type="submit">Log in</button>
 </form>
